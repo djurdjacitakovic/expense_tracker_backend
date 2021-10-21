@@ -26,4 +26,8 @@ app.post('/', function (req, res) {
     res.send('Got a DELETE request at /expense-groups')
   });
 
+  app.delete('/:userId', function (req, res) {
+    res.send(`Got a DELETE request at /expense-groups, userId:${req.params.userId}`)
+  });
+
   module.exports = app;
