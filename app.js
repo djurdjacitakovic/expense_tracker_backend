@@ -10,7 +10,7 @@ app.get('/', function (req, res) {
 var expenseGroupRoutes = require('./routes/expenseGroupRoutes');
 
 
-app.use('/expenseGroupRoutes',expenseGroupRoutes);
+app.use('/expense-groups',expenseGroupRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
