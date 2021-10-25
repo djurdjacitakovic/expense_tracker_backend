@@ -8,8 +8,10 @@ app.get('/', function (req, res) {
   res.send('hello world')
 });
 
+app.use(express.json());
+
 app.use(Server);
-app.use(Router);
+app.use('/expense-groups',Router);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
