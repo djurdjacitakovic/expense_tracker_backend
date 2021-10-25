@@ -1,33 +1,21 @@
 const express = require("express");
+
 const app = express.Router();
 
+app.use(express.json())
 
-app.post('/', function (req, res) {
-    res.send('Got a POST request')
-  });
-  
-  app.get('/', function (req, res) {
-    res.send('expense groups GET')
-  });
-  
-  app.get('/:userId', function (req, res) {
-    res.send(`expense groups GET, userId:${req.params.userId}`)
-  });
+const expenseGroupModel = require("../models");
 
-  app.put('/', function (req, res) {
-    res.send('Got a PUT request at /expense-groups')
-  });
+app.post("/test", async (request, response) => {
+    const exp = new expenseGroupModel(request.body);
   
-  app.put('/:userId', function (req, res) {
-    res.send(`Got a PUT request at /expense-groups, userId:${req.params.userId} `)
-  });
-  
-  app.delete('/', function (req, res) {
-    res.send('Got a DELETE request at /expense-groups')
-  });
+    try {
+      await exp.save();
+      response.send(exp);
+    } catch (error) {
+      response.status(500).send(error);
+    }
+});
 
-  app.delete('/:userId', function (req, res) {
-    res.send(`Got a DELETE request at /expense-groups, userId:${req.params.userId}`)
-  });
+module.exports = app;
 
-  module.exports = app;
