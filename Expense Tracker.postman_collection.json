@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "3b594f9c-335f-433f-83e6-93b1ec441626",
+		"name": "Expense Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Expense group",
+			"item": [
+				{
+					"name": "GET all expense groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/expense-groups",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST expense group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Exp\",\r\n    \"description\": \"Description.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/expense-groups",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT expense group by ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"updatedName\",\r\n    \"description\": \"descrrrrrrrrr\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/expense-groups/61768df213a29014c363eef2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense-groups",
+								"61768df213a29014c363eef2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET expense group by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/expense-groups/61765fab5024c4e8b10f300f",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense-groups",
+								"61765fab5024c4e8b10f300f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE expense group by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/expense-groups/6177b393743350b3bf505020",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense-groups",
+								"6177b393743350b3bf505020"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:3000"
+		}
+	]
+}
