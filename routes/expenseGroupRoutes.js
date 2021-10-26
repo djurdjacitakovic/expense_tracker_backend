@@ -16,11 +16,11 @@ app.post('/', async (request, response) => {
     }
 });
 
-app.put('/:Id', async(req, res) =>{
+app.put('/:id', async(req, res) =>{
 
   try
   {
-     const exp=await expenseGroupModel.findByIdAndUpdate(req.params.Id,{"name":`${req.body.name}`,
+     const exp=await expenseGroupModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
      "description":`${req.body.description}`}, {new: true});
 
      res.send(exp);
@@ -48,11 +48,11 @@ app.get('/', async(req, res)=>{
 
 });
 
-app.get('/:Id', async (req, res) =>{
+app.get('/:id', async (req, res) =>{
 
   try 
   {
-    const exp = await expenseGroupModel.findById(req.params.Id);
+    const exp = await expenseGroupModel.findById(req.params.id);
     res.send(exp);
   } catch (error)
    {
@@ -62,12 +62,12 @@ app.get('/:Id', async (req, res) =>{
 });
 
 
-app.delete('/:Id', async(req, res)=>{
+app.delete('/:id', async(req, res)=>{
 
 try
 {
- await expenseGroupModel.findByIdAndDelete(req.params.Id);
- res.send(`The object(ID: ${req.params.Id}) was deleted.`);
+ await expenseGroupModel.findByIdAndDelete(req.params.id);
+ res.send(`The object(ID: ${req.params.id}) was deleted.`);
 }
 catch (error)
   {
