@@ -16,22 +16,15 @@ app.post('/', async (request, response) => {
     }
 });
 
-app.put('/:Id', function(req, res) {
+app.put('/:Id', async(req, res) =>{
 
   try
   {
-     expenseGroupModel.findByIdAndUpdate(req.params.Id,{"name":`${req.body.name}`,"description":`${req.body.description}`},
-      {new: true},
-       function(err,docs)
-     {
-      if (err){
-        res.send(err);
-    }
-    else{
-      res.send(docs);
-    }
-     });
-       
+     const exp=await expenseGroupModel.findByIdAndUpdate(req.params.Id,{"name":`${req.body.name}`,
+     "description":`${req.body.description}`}, {new: true});
+
+     res.send(exp);
+
   }
   catch (error)
   { 
