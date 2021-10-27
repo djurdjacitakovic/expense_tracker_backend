@@ -3,6 +3,9 @@ const express = require("express");
 const app = express.Router();
 const expenseGroupModel = require("../models");
 
+const myLogger = require('../middlewares/logging');
+app.use(myLogger);
+
 app.post('/', async (request, response) => {
     try 
     {
