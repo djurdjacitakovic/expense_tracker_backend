@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express.Router();
 const expenseGroupModel = require("../models/expenseGroupModel");
-const expenseModel = require("../models/expenseModel");
 
 const myLogger = require('../middlewares/logging');
 app.use(myLogger);
@@ -41,7 +40,8 @@ app.get('/', async(req, res)=>{
  
   try 
   {
-    const exp = await expenseGroupModel.find({});
+    const { page = 1, limit = 4 } = req.query;
+    const exp = await expenseGroupModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
     res.send(exp);
 
   } catch (error)

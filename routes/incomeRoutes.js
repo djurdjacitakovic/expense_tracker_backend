@@ -40,7 +40,8 @@ app.get('/', async(req, res)=>{
  
   try 
   {
-    const exp = await incomeModel.find({});
+    const { page = 1, limit = 4 } = req.query;
+    const exp = await incomeModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
     res.send(exp);
 
   } catch (error)

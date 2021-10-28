@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express.Router();
 const incomeGroupModel = require("../models/incomeGroupModel");
-const incomeModel = require("../models/incomeModel");
 
 const myLogger = require('../middlewares/logging');
 app.use(myLogger);
@@ -23,6 +22,7 @@ app.put('/:id', async(req, res) =>{
 
   try
   {
+    
      const exp=await incomeGroupModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
      "description":`${req.body.description}`}, {new: true});
 
@@ -41,7 +41,8 @@ app.get('/', async(req, res)=>{
  
   try 
   {
-    const exp = await incomeGroupModel.find({});
+    const { page = 1, limit = 4 } = req.query;
+    const exp = await incomeGroupModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
     res.send(exp);
 
   } catch (error)
