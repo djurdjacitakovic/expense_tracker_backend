@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express.Router();
 const expenseGroupModel = require("../models/expenseGroupModel");
-const expenseModel = require("../models/expenseModel");
 
 const myLogger = require('../middlewares/logging');
 app.use(myLogger);
