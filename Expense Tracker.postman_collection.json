@@ -115,6 +115,362 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Income group",
+			"item": [
+				{
+					"name": "GET all income groups",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/income-groups",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET income group by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/income-groups/617a7aab1bb2a4a20d173eb7",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income-groups",
+								"617a7aab1bb2a4a20d173eb7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST income group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"inc_grp\",\r\n    \"description\":\"descriptionPOSTMAN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/income-groups",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT income group by ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"updated2\",\r\n    \"description\":\"222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/income-groups/617a7ae81bb2a4a20d173eba",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income-groups",
+								"617a7ae81bb2a4a20d173eba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE income group by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/income-groups/6179c5823317b44e7612db82",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income-groups",
+								"6179c5823317b44e7612db82"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Expense",
+			"item": [
+				{
+					"name": "GET all expenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/expense",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET expense by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/expense/6179c47bd80f9beecaaf5e45",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense",
+								"6179c47bd80f9beecaaf5e45"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST expense",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\":\"description\",\r\n    \"amount\":12345,\r\n    \"expenseGroup\":\"61768c74fb2ee16cf5955f59\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/expense",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT expense by ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\":\"descriptionPUT2\",\r\n    \"amount\":12333322233,\r\n    \"expenseGroup\":\"61768c74fb2ee16cf5955f59\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/expense/6179c47bd80f9beecaaf5e45",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense",
+								"6179c47bd80f9beecaaf5e45"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE expense by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/expense/617a7c6e1bb2a4a20d173ebf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense",
+								"617a7c6e1bb2a4a20d173ebf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Income",
+			"item": [
+				{
+					"name": "GET all incomes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/income",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET income by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/income/617a7db41bb2a4a20d173ec6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income",
+								"617a7db41bb2a4a20d173ec6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST income",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\":\"income2\",\r\n    \"amount\":1,\r\n    \"incomeGroup\":\"617a7aab1bb2a4a20d173eb7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/income",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT income by ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\":\"djurdjaaa\",\r\n    \"amount\":1,\r\n    \"incomeGroup\":\"617a7ae81bb2a4a20d173eba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/income/617a7db41bb2a4a20d173ec6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income",
+								"617a7db41bb2a4a20d173ec6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE income by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/income/617a7e171bb2a4a20d173ecb",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income",
+								"617a7e171bb2a4a20d173ecb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [

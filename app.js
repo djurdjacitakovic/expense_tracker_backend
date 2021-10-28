@@ -1,5 +1,8 @@
 const express = require("express");
-const expenseGroupRouter = require("./routes/expenseGroupRoutes")
+const expenseGroupRouter = require("./routes/expenseGroupRoutes");
+const incomeGroupRouter = require("./routes/incomeGroupRoutes");
+const expenseRouter = require("./routes/expenseRoutes");
+const incomeRouter = require("./routes/incomeRoutes");
 const app = express();
 const mongoose = require("mongoose");
 const config = require('./config');
@@ -26,6 +29,9 @@ db.once("open", function () {
 app.use(express.json());
 
 app.use('/expense-groups',expenseGroupRouter);
+app.use('/income-groups',incomeGroupRouter);
+app.use('/expense',expenseRouter);
+app.use('/income',incomeRouter);
 
 app.listen(config.app.port, () => {
   console.log(`Example app listening at http://localhost:${config.app.port}`);
