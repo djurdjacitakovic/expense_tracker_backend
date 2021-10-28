@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express.Router();
-const expenseGroupModel = require("../models/expenseGroupModel");
-const expenseModel = require("../models/expenseModel");
+const incomeGroupModel = require("../models/incomeGroupModel");
+const incomeModel = require("../models/incomeModel");
 
 const myLogger = require('../middlewares/logging');
 app.use(myLogger);
@@ -9,7 +9,7 @@ app.use(myLogger);
 app.post('/', async (request, response) => {
     try 
     {
-      const exp = new expenseGroupModel(request.body);
+      const exp = new incomeGroupModel(request.body);
       await exp.save();
       response.send(exp);
 
@@ -23,7 +23,7 @@ app.put('/:id', async(req, res) =>{
 
   try
   {
-     const exp=await expenseGroupModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
+     const exp=await incomeGroupModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
      "description":`${req.body.description}`}, {new: true});
 
      res.send(exp);
@@ -41,7 +41,7 @@ app.get('/', async(req, res)=>{
  
   try 
   {
-    const exp = await expenseGroupModel.find({});
+    const exp = await incomeGroupModel.find({});
     res.send(exp);
 
   } catch (error)
@@ -55,7 +55,7 @@ app.get('/:id', async (req, res) =>{
 
   try 
   {
-    const exp = await expenseGroupModel.findById(req.params.id);
+    const exp = await incomeGroupModel.findById(req.params.id);
     res.send(exp);
   } catch (error)
    {
@@ -69,7 +69,7 @@ app.delete('/:id', async(req, res)=>{
 
 try
 {
- await expenseGroupModel.findByIdAndDelete(req.params.id);
+ await incomeGroupModel.findByIdAndDelete(req.params.id);
  res.send(`The object(ID: ${req.params.id}) was deleted.`);
 }
 catch (error)
@@ -81,4 +81,3 @@ catch (error)
 
 
 module.exports = app;
-
