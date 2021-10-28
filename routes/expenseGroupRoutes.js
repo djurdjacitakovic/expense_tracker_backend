@@ -37,11 +37,11 @@ app.put('/:id', async(req, res) =>{
 });
   
 
-app.get('/', async(req, res)=>{
+app.get('/:page/:limit', async(req, res)=>{
  
   try 
   {
-    const exp = await expenseGroupModel.find({});
+    const exp = await expenseGroupModel.find({}).limit(parseInt(req.params.limit)).skip((req.params.page-1)*req.params.limit).exec();
     res.send(exp);
 
   } catch (error)
