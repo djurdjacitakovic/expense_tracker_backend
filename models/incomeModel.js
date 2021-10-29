@@ -17,12 +17,12 @@ const IncomeSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'IncomeGroup' 
     },
-    created:
+    dateCreated:
     {
         type:Date,
         default:Date.now()
     },
-    updated:
+    dateUpdated:
     {
         type:Date,
         default:Date.now()

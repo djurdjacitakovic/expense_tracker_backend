@@ -42,14 +42,15 @@ app.get('/', async(req, res)=>{
   {
     const { page = 1, limit = 4 } = req.query;
     const exp = await expenseGroupModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
-    const docCount=await expenseModel.find({}).length;
+    const docCount=await expenseGroupModel.countDocuments({});
+
     res.send(
     { 
       documentsCount: docCount,
-      pagesCount: docCount/limit,
+      pagesCount: Math.ceil(docCount/limit),
       expenseGroups: exp
 
-    }
+    });
 
   } catch (error)
    {

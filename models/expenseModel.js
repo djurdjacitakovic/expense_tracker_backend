@@ -18,12 +18,12 @@ const ExpenseSchema = new mongoose.Schema({
         ref: 'ExpenseGroup' 
     }
     ,
-    created:
+    dateCreated:
     {
         type:Date,
         default:Date.now()
     },
-    updated:
+    dataUpdated:
     {
         type:Date,
         default:Date.now()

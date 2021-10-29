@@ -9,7 +9,7 @@ app.get('/last-five', async(req, res)=>{
  
   try 
   {
-    const exp = await incomeModel.find({}).sort({ "updated": -1}).limit(5).exec();
+    const exp = await incomeModel.find({}).sort({ "dateUpdated": -1}).limit(5).exec();
     res.send(exp);
     
   } catch (error)
@@ -37,7 +37,7 @@ app.put('/:id', async(req, res) =>{
   try
   {
      const exp=await incomeModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
-     "description":`${req.body.description}`,"updated":`${Date.now()}`}, {new: true});
+     "description":`${req.body.description}`,"dateUpdated":`${Date.now()}`}, {new: true});
 
      res.send(exp);
 
@@ -56,14 +56,14 @@ app.get('/', async(req, res)=>{
   {
     const { page = 1, limit = 4 } = req.query;
     const exp = await incomeModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
-    const docCount=await expenseModel.find({}).length;
+    const docCount=await incomeModel.countDocuments({});
     res.send(
     { 
       documentsCount: docCount,
-      pagesCount: docCount/limit,
+      pagesCount: Math.ceil(docCount/limit),
       incomes: exp
 
-    }
+    });
 
   } catch (error)
    {
