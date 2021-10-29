@@ -5,6 +5,20 @@ const expenseModel = require("../models/expenseModel");
 const myLogger = require('../middlewares/logging');
 app.use(myLogger);
 
+app.get('/last-five', async(req, res)=>{
+ 
+  try 
+  {
+    const exp = await expenseModel.find({}).sort({ "updated": -1}).limit(5).exec();
+    res.send(exp);
+    
+  } catch (error)
+   {
+    res.status(500).send(error);
+  }
+
+});
+
 app.post('/', async (request, response) => {
     try 
     {
@@ -23,7 +37,7 @@ app.put('/:id', async(req, res) =>{
   try
   {
      const exp=await expenseModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
-     "description":`${req.body.description}`}, {new: true});
+     "description":`${req.body.description}`,"updated":`${Date.now()}`}, {new: true});
 
      res.send(exp);
 
@@ -41,8 +55,16 @@ app.get('/', async(req, res)=>{
   try 
   {
     const { page = 1, limit = 4 } = req.query;
-    const exp = await expenseModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
-    res.send(exp);
+    const exp = await expenseModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec(); 
+    const docCount=await expenseModel.find({}).length;
+    res.send(
+    { 
+      documentsCount: docCount,
+      pagesCount: docCount/limit,
+      expenses: exp
+
+    }
+    );
 
   } catch (error)
    {

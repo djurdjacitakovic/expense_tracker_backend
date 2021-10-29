@@ -17,6 +17,17 @@ const ExpenseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'ExpenseGroup' 
     }
+    ,
+    created:
+    {
+        type:Date,
+        default:Date.now()
+    },
+    updated:
+    {
+        type:Date,
+        default:Date.now()
+    }
    });
   
   const Expense = mongoose.model("Expense", ExpenseSchema);
