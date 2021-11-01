@@ -7,11 +7,15 @@ const incomeGroupController=require("../controllers/incomeGroupController");
 app.use(myLogger);
 
 
-app.route('/').post(incomeGroupController.createIncomeGroup);
-app.route('/').get(incomeGroupController.getAllIncomeGroups);
-app.route('/:id').get(incomeGroupController.getIncomeGroupById);
-app.route('/:id').put(incomeGroupController.updateIncomeGroup);
-app.route('/:id').delete(incomeGroupController.deleteIncomeGroup);
+app.route('/')
+.post(incomeGroupController.createIncomeGroup)
+.get(incomeGroupController.getAllIncomeGroups);
+
+app.route('/:id')
+.get(incomeGroupController.getIncomeGroupById)
+.put(incomeGroupController.updateIncomeGroup)
+.delete(incomeGroupController.deleteIncomeGroup);
+
 
 
 module.exports = app;

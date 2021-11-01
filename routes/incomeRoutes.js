@@ -6,12 +6,18 @@ const incomeController=require("../controllers/incomeController");
 
 app.use(myLogger);
 
-app.route('/last-five').get(incomeController.getLastFiveIncomes);
-app.route('/').post(incomeController.createIncome);
-app.route('/').get(incomeController.getAllIncomes);
-app.route('/:id').get(incomeController.getIncomeById);
-app.route('/:id').put(incomeController.updateIncome);
-app.route('/:id').delete(incomeController.deleteIncome);
+app.route('/last-five')
+.get(incomeController.getLastFiveIncomes);
+
+app.route('/')
+.post(incomeController.createIncome)
+.get(incomeController.getAllIncomes)
+
+app.route('/:id')
+.get(incomeController.getIncomeById)
+.put(incomeController.updateIncome)
+.delete(incomeController.deleteIncome);
+
 
 module.exports = app;
 

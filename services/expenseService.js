@@ -2,9 +2,20 @@ const expenseModel = require('../models/expenseModel');
 
 module.exports={
     getLastFiveExpenses:async()=>
-    {
-        const exp = await expenseModel.find({}).sort({ "dateUpdated": -1}).limit(5).exec();
-        return exp;
+    {    
+        try
+        {
+            const exp = await expenseModel.find({}).sort({ "dateUpdated": -1}).limit(5).exec();
+            return exp;
+        }
+        catch(error)
+        {
+            console.log(error);
+           
+
+        }
+        
+       
     },
     createExpense: async (params) =>
     {
@@ -16,6 +27,8 @@ module.exports={
         catch (error)
         {
             console.log(error);
+          
+
         }
         return exp;
     },
@@ -30,6 +43,8 @@ module.exports={
         catch(error)
         {
             console.log(error);
+         
+
         }
         
     },
@@ -43,6 +58,8 @@ module.exports={
     } catch (error) 
     {
         console.log(error);
+      
+
     }
     },
     updateExpenseById: async(id,params)=>
@@ -56,6 +73,8 @@ module.exports={
         catch(error)
         {
             console.log(error);
+          
+
         }
     },
     deleteExpenseById: async(id)=>
@@ -66,13 +85,20 @@ module.exports={
         catch(error)
         {
             console.log(error);
+          
         }
     },
     
     getCount:async()=>
     {
-        const docCount=await expenseModel.countDocuments({});
-
-        return docCount;
+        try {
+            const docCount=await expenseModel.countDocuments({});
+            return docCount;
+           }
+       catch (error) 
+       {
+           console.log(error);
+           
+       }
     }
 };

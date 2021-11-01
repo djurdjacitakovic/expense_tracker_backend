@@ -3,9 +3,19 @@ const incomeModel = require('../models/incomeModel');
 module.exports={
     
     getLastFiveIncomes:async()=>
-    {
-        const exp = await incomeModel.find({}).sort({ "dateUpdated": -1}).limit(5).exec();
-        return exp;
+    {     
+       try
+        {
+            const exp = await incomeModel.find({}).sort({ "dateUpdated": -1}).limit(5).exec();
+            return exp;
+        }
+        catch(error)
+        {
+            console.log(error);
+
+
+        }
+        
     },
     createIncome: async (params) =>
     {
@@ -17,6 +27,7 @@ module.exports={
         catch (error)
         {
             console.log(error);
+
         }
         return exp;
     },
@@ -31,6 +42,7 @@ module.exports={
         catch(error)
         {
             console.log(error);
+
         }
         
     },
@@ -44,6 +56,7 @@ module.exports={
     } catch (error) 
     {
         console.log(error);
+
     }
     },
     updateIncomeById: async(id,params)=>
@@ -57,6 +70,7 @@ module.exports={
         catch(error)
         {
             console.log(error);
+
         }
     },
     deleteIncomeById: async(id)=>
@@ -67,12 +81,19 @@ module.exports={
         catch(error)
         {
             console.log(error);
+
         }
     },
     
     getCount:async()=>
     {
-        const docCount=await incomeModel.countDocuments({});
-        return docCount;
+        try {
+            const docCount=await incomeModel.countDocuments({});
+            return docCount;
+           }
+       catch (error) 
+       {
+           console.log(error);
+       }
     }
 };

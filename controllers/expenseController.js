@@ -6,28 +6,43 @@ module.exports=
 {
     getLastFiveExpenses:async(req,res)=>
     {
-        const exp=await expenseService.getLastFiveExpenses();
+        try{
+            const exp=await expenseService.getLastFiveExpenses();
+            res.send(exp);
+        }
+        catch(error)
+        {
+            res.status(500).send(error);
 
-        res.send(exp);
+        }
+       
     },
     createExpense: async (req, res) =>
     {
-        const whether=validation.validateExpense(req.body.amount,req.body.expenseGroup);
+        const errorMessage=validation.validateExpense(req.body.amount,req.body.expenseGroup);
 
-        if(whether==="")
+        if(errorMessage==="")
         {
-            const exp=await expenseService.createExpense(req.body);
-            res.send(exp);
+            try{
+                const exp=await expenseService.createExpense(req.body);
+                res.send(exp);
+            }
+            catch(error)
+            {
+                res.status(500).send(error);
+            }
+            
         }
-        else res.send(whether);
+        else res.send(errorMessage);
         
       
     },
     getAllExpenses:async(req,res)=>
     {
         const { limit=5, page=1 } = req.query;
-        const exp=await expenseService.getAllExpenses(limit,page);
 
+        try{
+        const exp=await expenseService.getAllExpenses(limit,page);
         const docCount=await expenseService.getCount();
         res.send(
             { 
@@ -36,31 +51,58 @@ module.exports=
               expenses: exp
         
             });
+        }
+        catch(error)
+        {
+            res.status(500).send(error);
+
+        }
     },
     getExpenseById:async(req,res)=>
     {
         const id=req.params.id;
+        try{
         const exp=await expenseService.getExpenseById(id);
-
         res.send(exp);
+
+        }
+        catch(error)
+        {
+            res.status(500).send(error);
+
+        }
     },
     updateExpense:async(req,res)=>
     {
-        const whether=validation.validateExpense(req.body.amount,req.body.expenseGroup);
+        const errorMessage=validation.validateExpense(req.body.amount,req.body.expenseGroup);
         const id=req.params.id;
 
-        if(whether==="")
+        if(errorMessage==="")
         {
+            try{
             const exp=await expenseService.updateExpenseById(id,req.body);
             res.send(exp);
+            }
+            catch(error)
+            {
+                res.status(500).send(error);
+
+            }
         }
-        else res.send(whether);
+        else res.send(errorMessage);
     },
     deleteExpense:async(req,res)=>
     {
         const id=req.params.id;
+        try{
         await expenseService.deleteExpenseById(id);
 
-        res.send(`The object(ID: ${id}) was deleted.`);
+        res.send(`The object(ID: ${id}) was deleted.`);    
     }
+    catch(error)
+    {
+        res.status(500).send(error);
+
+    }
+}
 };

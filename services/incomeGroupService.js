@@ -40,6 +40,7 @@ getIncomeGroupById: async(id)=>
     } catch (error) 
     {
         console.log(error);
+
     }
     
 
@@ -54,6 +55,7 @@ updateIncomeGroup: async(id,params)=>
     catch(error)
     {
         console.log(error);
+
     }
        
 
@@ -66,14 +68,22 @@ deleteIncomeGroupById: async(id)=>
     catch(error)
     {
         console.log(error);
+        
+
     }
    
     
 },
 getCount:async()=>
 {
-    const docCount=await incomeGroupModel.countDocuments({});
-    return docCount;
+    try {
+        const docCount=await incomeGroupModel.countDocuments({});
+        return docCount;
+       }
+   catch (error) 
+   {
+       console.log(error);
+   }
 }
 };
 

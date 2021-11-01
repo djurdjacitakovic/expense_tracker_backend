@@ -7,11 +7,15 @@ const expenseGroupController=require("../controllers/expenseGroupController");
 app.use(myLogger);
 
 
-app.route('/').post(expenseGroupController.createExpenseGroup);
-app.route('/').get(expenseGroupController.getAllExpenseGroups);
-app.route('/:id').get(expenseGroupController.getExpenseGroupById);
-app.route('/:id').put(expenseGroupController.updateExpenseGroup);
-app.route('/:id').delete(expenseGroupController.deleteExpenseGroup);
+app.route('/')
+.post(expenseGroupController.createExpenseGroup)
+.get(expenseGroupController.getAllExpenseGroups);
+
+app.route('/:id')
+.get(expenseGroupController.getExpenseGroupById)
+.put(expenseGroupController.updateExpenseGroup)
+.delete(expenseGroupController.deleteExpenseGroup);
+
 
 
 module.exports = app;

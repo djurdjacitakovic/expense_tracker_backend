@@ -5,22 +5,28 @@ module.exports=
 {
     createIncomeGroup: async (req, res) =>
     {
-        const whether=validation.validateRequiredField(req.body.name);
+        const errorMessage=validation.validateRequiredField(req.body.name);
 
-        if(whether==="")
-       {
+        if(errorMessage==="")
+       {    try{
             const exp=await incomeGroupService.createIncomeGroup(req.body);
             res.send(exp);
+        }catch(error)
+        {
+            res.status(500).send(error);
+
         }
-        else res.send(whether);
+    }
+        else res.send(errorMessage);
         
       
     },
     getAllIncomeGroups:async(req,res)=>
     {
         const { limit=5, page=1 } = req.query;
-        const exp=await incomeGroupService.getAllIncomeGroups(limit,page);
 
+        try{
+        const exp=await incomeGroupService.getAllIncomeGroups(limit,page);
         const docCount= await incomeGroupService.getCount();
         res.send(
             { 
@@ -29,35 +35,57 @@ module.exports=
               expenses: exp
         
             });
+        }catch(error)
+        {
+            res.status(500).send(error);
 
+        }
     },
     getIncomeGroupById: async(req,res)=>
     {
         const id=req.params.id;
-        const exp=await incomeGroupService.getIncomeGroupById(id);
+        try{
+             const exp=await incomeGroupService.getIncomeGroupById(id);
+             res.send(exp);
+        }catch(error)
+        {
+            res.status(500).send(error);
 
-        res.send(exp);
-    },
+        }
+},
     updateIncomeGroup:async(req,res)=>
     {
-        const whether=validation.validateRequiredField(req.body.name);
+        const errorMessage=validation.validateRequiredField(req.body.name);
         const id=req.params.id;
 
-        if(whether==="")
+        if(errorMessage==="")
         {
-            const exp=await incomeGroupService.updateIncomeGroup(id,req.body);
-            res.send(exp);
+            try{
+                const exp=await incomeGroupService.updateIncomeGroup(id,req.body);
+                res.send(exp);
+            }catch(error)
+            {
+                res.status(500).send(error);
+
+            }
+
         }
-        else res.send(whether);
+        else res.send(errorMessage);
                   
       
     },
     deleteIncomeGroup:async(req,res)=>
     {
         const id=req.params.id;
-        await incomeGroupService.deleteIncomeGroupById(id);
+        try{
+            await incomeGroupService.deleteIncomeGroupById(id);
+            res.send(`The object(ID: ${id}) was deleted.`);
+        } catch(error)
+        {
+            res.status(500).send(error);
 
-        res.send(`The object(ID: ${id}) was deleted.`);
-    }
+        }
+}
+
 
 };

@@ -41,6 +41,7 @@ getExpenseGroupById: async(id)=>
 
     } catch (error) 
     {
+     
         console.log(error);
     }
     
@@ -56,6 +57,7 @@ updateExpenseGroup: async(id,params)=>
     catch(error)
     {
         console.log(error);
+       
     }
        
 
@@ -68,15 +70,22 @@ deleteExpenseGroupById: async(id)=>
     catch(error)
     {
         console.log(error);
+
     }
    
     
 },
 getCount:async()=>
-{
-    const docCount=await expenseGroupModel.countDocuments({});
-    return docCount;
-
+{  
+   
+        try {
+             const docCount=await expenseGroupModel.countDocuments({});
+             return docCount;
+            }
+        catch (error) 
+        {
+            console.log(error);
+        }
 }
 };
 
