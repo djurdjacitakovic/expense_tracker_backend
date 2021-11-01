@@ -13,7 +13,8 @@ createExpenseGroup: async (params) =>
    }
     catch (error)
     {
-        console.log(error);
+        throw new Error({"Error":error});
+
     }
     return exp;
 },
@@ -26,7 +27,8 @@ getAllExpenseGroups: async(limit,page)=>
     }
     catch(error)
     {
-        console.log(error);
+        throw new Error({"Error":error});
+
     }
     
     
@@ -42,7 +44,8 @@ getExpenseGroupById: async(id)=>
     } catch (error) 
     {
      
-        console.log(error);
+        throw new Error({"Error":error});
+
     }
     
 
@@ -56,8 +59,8 @@ updateExpenseGroup: async(id,params)=>
     }
     catch(error)
     {
-        console.log(error);
-       
+        throw new Error({"Error":error});
+      
     }
        
 
@@ -69,7 +72,7 @@ deleteExpenseGroupById: async(id)=>
     }
     catch(error)
     {
-        console.log(error);
+        throw new Error({"Error":error});
 
     }
    
@@ -84,7 +87,7 @@ getCount:async()=>
             }
         catch (error) 
         {
-            console.log(error);
+            throw new Error({"Error":error});
         }
 }
 };

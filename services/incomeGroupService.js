@@ -11,7 +11,9 @@ createIncomeGroup: async (params) =>
    }
     catch (error)
     {
-        console.log(error);
+        
+        throw new Error({"Error":error});
+
     }
     return exp;
 },
@@ -24,7 +26,9 @@ getAllIncomeGroups: async(limit,page)=>
     }
     catch(error)
     {
-        console.log(error);
+       
+        throw new Error({"Error":error});
+
     }
     
     
@@ -39,8 +43,8 @@ getIncomeGroupById: async(id)=>
 
     } catch (error) 
     {
-        console.log(error);
-
+       
+        throw new Error({"Error":error});
     }
     
 
@@ -54,8 +58,8 @@ updateIncomeGroup: async(id,params)=>
     }
     catch(error)
     {
-        console.log(error);
-
+     
+        throw new Error({"Error":error});
     }
        
 
@@ -67,8 +71,8 @@ deleteIncomeGroupById: async(id)=>
     }
     catch(error)
     {
-        console.log(error);
-        
+      
+        throw new Error({"Error":error});
 
     }
    
@@ -82,7 +86,8 @@ getCount:async()=>
        }
    catch (error) 
    {
-       console.log(error);
+      throw new Error({"Error":error});
+
    }
 }
 };

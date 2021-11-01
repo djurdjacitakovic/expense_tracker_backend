@@ -10,8 +10,7 @@ module.exports={
         }
         catch(error)
         {
-            console.log(error);
-           
+            throw new Error({"Error":error});
 
         }
         
@@ -26,8 +25,7 @@ module.exports={
        }
         catch (error)
         {
-            console.log(error);
-          
+            throw new Error({"Error":error});       
 
         }
         return exp;
@@ -42,8 +40,7 @@ module.exports={
         }
         catch(error)
         {
-            console.log(error);
-         
+            throw new Error({"Error":error});       
 
         }
         
@@ -57,8 +54,7 @@ module.exports={
 
     } catch (error) 
     {
-        console.log(error);
-      
+        throw new Error({"Error":error});
 
     }
     },
@@ -72,8 +68,7 @@ module.exports={
         }
         catch(error)
         {
-            console.log(error);
-          
+            throw new Error({"Error":error});
 
         }
     },
@@ -84,8 +79,7 @@ module.exports={
         }
         catch(error)
         {
-            console.log(error);
-          
+            throw new Error({"Error":error});
         }
     },
     
@@ -97,8 +91,7 @@ module.exports={
            }
        catch (error) 
        {
-           console.log(error);
-           
+           throw new Error({"Error":error});
        }
     }
 };
