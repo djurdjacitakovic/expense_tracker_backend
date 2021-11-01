@@ -113,6 +113,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GET expense groups - page&limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/expense-groups/?limit=3&page=1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense-groups",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "3"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -232,6 +260,33 @@
 							"path": [
 								"income-groups",
 								"6179c5823317b44e7612db82"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET income groups - page&limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/income-groups?limit=2&page=2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income-groups"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -358,6 +413,51 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GET last five expenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/expense/last-five",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense",
+								"last-five"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET expenses - page&limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/expense?page=1&limit=1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"expense"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -465,6 +565,52 @@
 							"path": [
 								"income",
 								"617a7e171bb2a4a20d173ecb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET last five incomes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/income/last-five",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income",
+								"last-five"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET incomes - page&limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/income/?page=2&limit=1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"income",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
 							]
 						}
 					},
