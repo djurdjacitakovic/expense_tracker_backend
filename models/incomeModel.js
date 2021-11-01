@@ -16,6 +16,16 @@ const IncomeSchema = new mongoose.Schema({
         required:true,
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'IncomeGroup' 
+    },
+    dateCreated:
+    {
+        type:Date,
+        default:Date.now()
+    },
+    dateUpdated:
+    {
+        type:Date,
+        default:Date.now()
     }
    });
   

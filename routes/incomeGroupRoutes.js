@@ -43,10 +43,18 @@ app.get('/', async(req, res)=>{
   {
     const { page = 1, limit = 4 } = req.query;
     const exp = await incomeGroupModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
-    res.send(exp);
+    const docCount=await incomeGroupModel.countDocuments({});
+    res.send(
+    { 
+      documentsCount: docCount,
+      pagesCount: Math.ceil(docCount/limit),
+      incomeGroups: exp
 
-  } catch (error)
-   {
+    });
+
+  } 
+  catch (error)
+  {
     res.status(500).send(error);
   }
 

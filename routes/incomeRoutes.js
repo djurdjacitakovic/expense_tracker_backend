@@ -5,6 +5,20 @@ const incomeModel = require("../models/incomeModel");
 const myLogger = require('../middlewares/logging');
 app.use(myLogger);
 
+app.get('/last-five', async(req, res)=>{
+ 
+  try 
+  {
+    const exp = await incomeModel.find({}).sort({ "dateUpdated": -1}).limit(5).exec();
+    res.send(exp);
+    
+  } catch (error)
+   {
+    res.status(500).send(error);
+  }
+
+});
+
 app.post('/', async (request, response) => {
     try 
     {
@@ -23,7 +37,7 @@ app.put('/:id', async(req, res) =>{
   try
   {
      const exp=await incomeModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
-     "description":`${req.body.description}`}, {new: true});
+     "description":`${req.body.description}`,"dateUpdated":`${Date.now()}`}, {new: true});
 
      res.send(exp);
 
@@ -42,7 +56,14 @@ app.get('/', async(req, res)=>{
   {
     const { page = 1, limit = 4 } = req.query;
     const exp = await incomeModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
-    res.send(exp);
+    const docCount=await incomeModel.countDocuments({});
+    res.send(
+    { 
+      documentsCount: docCount,
+      pagesCount: Math.ceil(docCount/limit),
+      incomes: exp
+
+    });
 
   } catch (error)
    {
