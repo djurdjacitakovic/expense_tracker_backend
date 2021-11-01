@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express.Router();
 const incomeModel = require("../models/incomeModel");
-
+const validation=require("../helper/validation");
 const myLogger = require('../middlewares/logging');
+
 app.use(myLogger);
 
 app.get('/last-five', async(req, res)=>{
@@ -23,8 +24,13 @@ app.post('/', async (request, response) => {
     try 
     {
       const exp = new incomeModel(request.body);
-      await exp.save();
-      response.send(exp);
+      const[whether,errorMess]=validation.validateIncome(request.body.amount,request.body.incomeGroup);
+      if(whether)
+      {
+         await exp.save();
+         response.send(exp);
+      }
+      else response.send(errorMess);
 
     } catch (error)
      {
@@ -36,11 +42,15 @@ app.put('/:id', async(req, res) =>{
 
   try
   {
-     const exp=await incomeModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
-     "description":`${req.body.description}`,"dateUpdated":`${Date.now()}`}, {new: true});
+    const[whether,errorMess]=validation.validateIncome(req.body.amount,req.body.expenseGroup);
+    if(whether)
+    {
+        const exp=await incomeModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
+        "description":`${req.body.description}`}, {new: true});
 
-     res.send(exp);
-
+         res.send(exp);
+    }
+    else res.send(errorMess);
   }
   catch (error)
   { 
@@ -55,16 +65,16 @@ app.get('/', async(req, res)=>{
   try 
   {
     const { page = 1, limit = 4 } = req.query;
-    const exp = await incomeModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
-    const docCount=await incomeModel.countDocuments({});
-    res.send(
-    { 
-      documentsCount: docCount,
-      pagesCount: Math.ceil(docCount/limit),
-      incomes: exp
 
-    });
+    const[whether,errorMess]=validation.validateNumbers(page,limit);
 
+    if(whether)
+    {
+      const exp = await incomeModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
+      res.send(exp);
+    }
+    else res.send(errorMess);
+    
   } catch (error)
    {
     res.status(500).send(error);

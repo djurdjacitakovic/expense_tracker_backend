@@ -1,31 +1,46 @@
 const express = require("express");
 const app = express.Router();
 const expenseGroupModel = require("../models/expenseGroupModel");
-
+const validation=require("../helper/validation");
 const myLogger = require('../middlewares/logging');
+
 app.use(myLogger);
 
 app.post('/', async (request, response) => {
     try 
     {
       const exp = new expenseGroupModel(request.body);
-      await exp.save();
-      response.send(exp);
-
-    } catch (error)
-     {
-      response.status(500).send(error);
+      const[whether,errorMess]=validation.validateRequiredField(request.body.name);
+      
+      if(whether)
+      {
+        await exp.save();
+        response.send(exp);
+      }
+       else response.send(errorMess);
+   
     }
+     catch (error)
+     {
+       response.status(500).send(error);
+     }
 });
 
 app.put('/:id', async(req, res) =>{
 
   try
-  {
-     const exp=await expenseGroupModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
-     "description":`${req.body.description}`}, {new: true});
-
-     res.send(exp);
+  {    
+    
+    const[whether,errorMess]=validation.validateRequiredField(req.body.name);
+      
+    if(whether)
+    {
+       const exp=await expenseGroupModel.findByIdAndUpdate(req.params.id,{"name":`${req.body.name}`,
+      "description":`${req.body.description}`}, {new: true});
+       res.send(exp);
+    }
+    else res.send(errorMess);
+    
 
   }
   catch (error)
@@ -41,16 +56,24 @@ app.get('/', async(req, res)=>{
   try 
   {
     const { page = 1, limit = 4 } = req.query;
-    const exp = await expenseGroupModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
-    const docCount=await expenseGroupModel.countDocuments({});
 
-    res.send(
+    const[whether,errorMess]=validation.validateNumbers(page,limit);
+      
+    if(whether)
+    {
+      const exp = await expenseGroupModel.find({}).limit(parseInt(limit)).skip((page-1)*limit).exec();
+      const docCount=await expenseGroupModel.countDocuments({});
+       res.send(
     { 
-      documentsCount: docCount,
-      pagesCount: Math.ceil(docCount/limit),
-      expenseGroups: exp
+       documentsCount: docCount,
+       pagesCount: Math.ceil(docCount/limit),
+       expenses: exp
 
     });
+    }
+    else res.send(errorMess);
+
+   
 
   } catch (error)
    {
